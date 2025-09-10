@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إضافة / تعديل منتج - AL-BARIK Co.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap');
+    body {
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+    }
+    .input-glow:focus {
+      box-shadow: 0 0 10px rgba(230, 57, 70, 0.3);
+      border-color: #E63946;
+    }
+    .btn-glow {
+      box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+      transition: all 0.3s ease;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 0 25px rgba(230, 57, 70, 0.6);
+    }
+    .image-preview {
+      width: 200px;
+      height: 200px;
+      border: 2px dashed #E63946;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto;
+      overflow: hidden;
+    }
+    .image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="container mx-auto px-6 py-12 max-w-4xl">
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+      <div class="flex items-center space-x-4 space-x-reverse mb-6">
+        <div class="bg-gradient-to-br from-red-500 to-red-600 text-white p-3 rounded-2xl">
+          <span class="text-2xl font-bold">البارق</span>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">للإلكترونات</h1>
+          <p class="text-sm text-gray-600">لوحة التحكم - إدارة المنتجات</p>
+        </div>
+      </div>
+
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">إضافة أو تعديل منتج</h2>
+
+      <form id="productForm" class="space-y-6">
+        <input type="hidden" id="productId" value="">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-right text-gray-700 mb-2">اسم المنتج *</label>
+            <input type="text" id="productName" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none text-right input-glow">
+          </div>
+          <div>
+            <label class="block text-right text-gray-700 mb-2">السعر (د.ل) *</label>
+            <input type="number" id="productPrice" step="0.01" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none text-right input-glow">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-right text-gray-700 mb-2">الوصف *</label>
+          <textarea id="productDesc" rows="4" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none text-right input-glow resize-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-right text-gray-700 mb-2">صورة المنتج</label>
+            <input type="file" id="productImageFile" accept="image/*" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none text-right">
+            <div class="image-preview" id="imagePreview">
+              <span class="text-gray-500">اختر صورة</span>
+            </div>
+          </div>
+          <div>
+            <label class="block text-right text-gray-700 mb-2">الفئة</label>
+            <select id="productCategory" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none text-right">
+              <option value="phones">هواتف</option>
+              <option value="laptops">لابتوبات</option>
+              <option value="home">أجهزة منزلية</option>
+              <option value="accessories">إكسسوارات</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 space-x-reverse">
+          <input type="checkbox" id="productFeatured" class="w-5 h-5 text-red-500">
+          <label for="productFeatured" class="text-gray-700">وضع المنتج كـ "مميز"</label>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <button type="submit" class="flex-1 bg-red-500 hover:bg-red-600 text-white text-xl py-4 rounded-xl font-bold transition-all duration-300 btn-glow flex items-center justify-center space-x-2">
+            <i class="fas fa-save"></i>
+            <span id="submitButtonText">حفظ المنتج</span>
+          </button>
+          <a href="index.html" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white text-xl py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center space-x-2">
+            <i class="fas fa-arrow-right"></i>
+            <span>العودة للمتجر</span>
+          </a>
+        </div>
+      </form>
+
+      <!-- Product List -->
+      <div class="mt-12">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">المنتجات الحالية</h3>
+        <div id="productList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Will be filled by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get products from localStorage or use defaults
+    function getProducts() {
+      const savedProducts = localStorage.getItem('albarikProducts');
+      if (savedProducts) {
+        return JSON.parse(savedProducts);
+      } else {
+        return [
+          {
+            id: 1,
+            name: "هاتف ذكي براقة X",
+            price: 1299,
+            originalPrice: 1599,
+            image: "https://placehold.co/300x300/white/red?text=Phone",
+            category: "phones",
+            rating: 4.8,
+            featured: true,
+            description: "هاتف ذكي متطور بشاشة 6.7 بوصة وذاكرة 256GB وتقنية 5G. كاميرا احترافية بدقة 108 ميجابكسل."
+          },
+          {
+            id: 2,
+            name: "لابتوب براقة برو",
+            price: 3499,
+            originalPrice: 3999,
+            image: "https://placehold.co/300x300/white/red?text=Laptop",
+            category: "laptops",
+            rating: 4.9,
+            featured: true,
+            description: "لابتوب قوي مع معالج Intel Core i7 وذاكرة 16GB ومساحة تخزين 512GB SSD. شاشة 15.6 بوصة بدقة 4K."
+          }
+        ];
+      }
+    }
+
+    // Save products to localStorage
+    function saveProducts(products) {
+      localStorage.setItem('albarikProducts', JSON.stringify(products));
+    }
+
+    // Image preview
+    const imageInput = document.getElementById('productImageFile');
+    const imagePreview = document.getElementById('imagePreview');
+    let uploadedImage = null;
+
+    imageInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          uploadedImage = e.target.result;
+          imagePreview.innerHTML = `<img src="${uploadedImage}" alt="Preview">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Form submission
+    const productForm = document.getElementById('productForm');
+    const productIdInput = document.getElementById('productId');
+    const submitButtonText = document.getElementById('submitButtonText');
+
+    productForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const id = productIdInput.value ? parseInt(productIdInput.value) : Date.now();
+      const name = document.getElementById('productName').value;
+      const price = parseFloat(document.getElementById('productPrice').value);
+      const description = document.getElementById('productDesc').value;
+      const category = document.getElementById('productCategory').value;
+      const featured = document.getElementById('productFeatured').checked;
+
+      const product = {
+        id,
+        name,
+        price,
+        originalPrice: price * 1.2,
+        description,
+        image: uploadedImage || 'https://placehold.co/300x300/white/red?text=New+Product',
+        category,
+        rating: 4.5,
+        featured
+      };
+
+      const products = getProducts();
+      const existingIndex = products.findIndex(p => p.id === id);
+
+      if (existingIndex > -1) {
+        products[existingIndex] = product;
+      } else {
+        products.push(product);
+      }
+
+      saveProducts(products);
+      
+      alert('✅ تم حفظ المنتج بنجاح!');
+      location.reload();
+    });
+
+    // Display product list
+    const productList = document.getElementById('productList');
+
+    function displayProductList() {
+      const products = getProducts();
+      productList.innerHTML = '';
+      products.forEach(product => {
+        productList.innerHTML += `
+          <div class="bg-gray-50 rounded-xl p-4 flex items-center space-x-4 space-x-reverse">
+            <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded-lg">
+            <div class="flex-1">
+              <h3 class="font-bold text-gray-900">${product.name}</h3>
+              <p class="text-red-500">${product.price} د.ل</p>
+            </div>
+            <div class="flex space-x-2 space-x-reverse">
+              <button onclick="editProduct(${product.id})" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button onclick="deleteProduct(${product.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Edit product
+    function editProduct(id) {
+      const products = getProducts();
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+
+      document.getElementById('productId').value = product.id;
+      document.getElementById('productName').value = product.name;
+      document.getElementById('productPrice').value = product.price;
+      document.getElementById('productDesc').value = product.description;
+      document.getElementById('productCategory').value = product.category;
+      document.getElementById('productFeatured').checked = product.featured;
+
+      if (product.image) {
+        uploadedImage = product.image;
+        imagePreview.innerHTML = `<img src="${uploadedImage}" alt="Preview">`;
+      }
+
+      submitButtonText.textContent = 'تحديث المنتج';
+      document.getElementById('productForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Delete product
+    function deleteProduct(id) {
+      if (!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
+      const products = getProducts().filter(p => p.id !== id);
+      saveProducts(products);
+      displayProductList();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      displayProductList();
+    });
+  </script>
+</body>
+</html>
