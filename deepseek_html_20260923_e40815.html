@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>NOVA Properties | نوفا للعقارات — عقارات استثنائية في ليبيا</title>
+<meta name="description" content="نوفا للعقارات — نجد لك المكان الذي يشبهك. عقارات سكنية وتجارية مختارة بعناية في طرابلس، مصراتة، بنغازي." />
+<meta name="theme-color" content="#F7F4EE" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=80" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream:  '#F7F4EE',
+          sand:   '#EDE7DC',
+          ink:    '#191814',
+          muted:  '#6E675C',
+          bronze: '#A07C4A',
+          'bronze-soft': '#C9A87C',
+          line:   '#E3DCD0',
+        },
+        fontFamily: {
+          sans: ['"IBM Plex Sans Arabic"', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        },
+        maxWidth: { shell: '1360px' },
+        boxShadow: {
+          soft:  '0 24px 60px -28px rgba(25,24,20,0.28)',
+          card:  '0 18px 44px -24px rgba(25,24,20,0.22)',
+        },
+      }
+    }
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background-color: #F7F4EE;
+    color: #191814;
+    font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  ::selection { background: #A07C4A; color: #F7F4EE; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #EFEAE1; }
+  ::-webkit-scrollbar-thumb { background: #D2C8B7; border-radius: 999px; border: 3px solid #EFEAE1; }
+  ::-webkit-scrollbar-thumb:hover { background: #A07C4A; }
+
+  /* ---------- Reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 1000ms cubic-bezier(.16,1,.3,1), transform 1000ms cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .page-enter { animation: fadeUp 900ms cubic-bezier(.16,1,.3,1) both; }
+
+  @keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1); }
+  }
+  .hero-media { animation: heroZoom 2200ms cubic-bezier(.16,1,.3,1) both; }
+
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  .line-grow { transform-origin: right center; animation: lineGrow 1200ms 400ms cubic-bezier(.16,1,.3,1) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .page-enter, .hero-media, .line-grow { animation: none !important; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+
+  /* ---------- Form controls ---------- */
+  select, input, textarea, button { font-family: inherit; }
+  select {
+    background-image: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  select::-ms-expand { display: none; }
+  option { color: #191814; background: #ffffff; }
+
+  .field-select:focus-visible,
+  .field-input:focus-visible {
+    outline: none;
+    border-color: #A07C4A;
+    box-shadow: 0 0 0 3px rgba(160,124,74,0.16);
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #A07C4A;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* ---------- Text helpers ---------- */
+  .balance { text-wrap: balance; }
+  .pretty  { text-wrap: pretty; }
+
+  /* ---------- Decorative hairlines ---------- */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(to left, #E3DCD0, rgba(227,220,208,0));
+  }
+
+  /* ---------- Noise texture (very subtle) ---------- */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  .card-img { transition: transform 1200ms cubic-bezier(.16,1,.3,1); }
+  .group:hover .card-img { transform: scale(1.055); }
+</style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+/* ============================================================
+   ICON — renders Lucide icons via the UMD build
+   ============================================================ */
+function Icon({ name, size = 20, strokeWidth = 1.5, className = "" }) {
+  const hostRef = useRef(null);
+
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host || !window.lucide || !window.lucide.icons) return;
+
+    const node = window.lucide.icons[name];
+    if (!node) return;
+
+    host.innerHTML = "";
+
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("xmlns", NS);
+    svg.setAttribute("width", String(size));
+    svg.setAttribute("height", String(size));
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", String(strokeWidth));
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+
+    const paint = (arr, parent) => {
+      if (!Array.isArray(arr)) return;
+      arr.forEach((item) => {
+        if (!Array.isArray(item) || typeof item[0] !== "string") return;
+        const [tag, attrs, kids] = item;
+        const el = document.createElementNS(NS, tag);
+        if (attrs && typeof attrs === "object") {
+          Object.keys(attrs).forEach((k) => {
+            if (attrs[k] !== undefined && attrs[k] !== null) {
+              el.setAttribute(k, String(attrs[k]));
+            }
+          });
+        }
+        if (Array.isArray(kids)) paint(kids, el);
+        parent.appendChild(el);
+      });
+    };
+
+    paint(Array.isArray(node) ? node : node.children, svg);
+    host.appendChild(svg);
+  }, [name, size, strokeWidth]);
+
+  return (
+    <span
+      ref={hostRef}
+      aria-hidden="true"
+      className={"inline-flex shrink-0 items-center justify-center " + className}
+    />
+  );
+}
+
+/* ============================================================
+   REVEAL — scroll-triggered entrance
+   ============================================================ */
+function Reveal({ children, delay = 0, className = "", as: Tag = "div", ...rest }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Tag
+      ref={ref}
+      style={{ transitionDelay: delay ? `${delay}ms` : undefined }}
+      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const PROPERTIES = [
+  {
+    id: 1,
+    name: "The Pearl Residence",
+    city: "طرابلس",
+    location: "حي الأندلس، طرابلس",
+    type: "فيلا",
+    beds: 5, baths: 4, area: 420,
+    price: 2400000,
+    tag: "مميز",
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    id: 2,
+    name: "Al Andalus Villa",
+    city: "طرابلس",
+    location: "قرقارش، طرابلس",
+    type: "فيلا",
+    beds: 4, baths: 3, area: 380,
+    price: 1650000,
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    id: 3,
+    name: "Marina Heights",
+    city: "مصراتة",
+    location: "الكورنيش، مصراتة",
+    type: "بنتهاوس",
+    beds: 3, baths: 2, area: 210,
+    price: 980000,
+    tag: "جديد",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    id: 4,
+    name: "Palm Residence",
+    city: "بنغازي",
+    location: "الكيش، بنغازي",
+    type: "شقة",
+    beds: 2, baths: 2, area: 165,
+    price: 720000,
+    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    id: 5,
+    name: "Azure House",
+    city: "طرابلس",
+    location: "زاوية الدهماني، طرابلس",
+    type: "فيلا",
+    beds: 4, baths: 3, area: 295,
+    price: 1320000,
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+  },
+  {
+    id: 6,
+    name: "The Olive Villa",
+    city: "بنغازي",
+    location: "الفويهات، بنغازي",
+    type: "فيلا",
+    beds: 4, baths: 4, area: 340,
+    price: 1150000,
+    tag: "مميز",
+    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=80",
+  },
+];
+
+const CITIES = ["طرابلس", "مصراتة", "بنغازي"];
+const TYPES = ["فيلا", "شقة", "بنتهاوس"];
+const PRICE_BANDS = [
+  { value: "low",  label: "أقل من مليون د.ل" },
+  { value: "mid",  label: "1 – 2 مليون د.ل" },
+  { value: "high", label: "أكثر من 2 مليون د.ل" },
+];
+
+const SERVICES = [
+  {
+    n: "01",
+    title: "شراء العقارات",
+    icon: "KeyRound",
+    desc: "نرافقك من أول زيارة حتى توقيع العقد، مع تقييم مستقل وشفافية كاملة في كل خطوة.",
+  },
+  {
+    n: "02",
+    title: "بيع العقارات",
+    icon: "Tag",
+    desc: "تسويق مدروس، تصوير احترافي، وشبكة مشترين موثوقة تضمن أفضل سعر في الوقت المناسب.",
+  },
+  {
+    n: "03",
+    title: "إدارة العقارات",
+    icon: "Building2",
+    desc: "إدارة كاملة للمحافظ العقارية: التأجير، الصيانة، التحصيل، والتقارير الدورية.",
+  },
+  {
+    n: "04",
+    title: "الاستشارات العقارية",
+    icon: "Compass",
+    desc: "تحليل سوق دقيق وتوصيات استثمارية مبنية على معرفة محلية عميقة بالمدن الليبية.",
+  },
+];
+
+const WHY = [
+  {
+    icon: "Gem",
+    title: "اختيارات مدروسة",
+    en: "Curated",
+    desc: "لا نعرض كل شيء. كل عقار في محفظتنا يخضع لتقييم الموقع، الجودة، والقيمة قبل أن يصل إليك.",
+  },
+  {
+    icon: "HeartHandshake",
+    title: "خدمة شخصية",
+    en: "Personal",
+    desc: "مستشار واحد مخصص لك، يفهم أولوياتك ويرافقك حتى تجد المكان الذي يشبهك فعلاً.",
+  },
+  {
+    icon: "MapPinned",
+    title: "معرفة محلية",
+    en: "Local",
+    desc: "خبرة عميقة بسوق العقار الليبي — الأحياء، الأسعار، والفرص التي لا تظهر للعلن.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote: "تعاملت مع شركات كثيرة، لكن الفرق هنا كان في الهدوء والوضوح. لم يحاولوا بيعي شيئاً لا يناسبني، بل انتظروا حتى وجدوا المنزل الصحيح.",
+    name: "سارة المصراتي",
+    role: "طرابلس — فيلا سكنية",
+  },
+  {
+    quote: "أداروا بيع عقار العائلة بالكامل. التقييم كان واقعياً، والتصوير أظهر المنزل بأفضل صورة. أُغلق البيع في أقل من شهرين.",
+    name: "طارق الزوي",
+    role: "بنغازي — بيع عقار",
+  },
+  {
+    quote: "أحتجت استشارة قبل الاستثمار في مشروع تجاري. التحليل الذي قدموه كان دقيقاً ومبنياً على أرقام حقيقية، لا وعود.",
+    name: "منى الشريف",
+    role: "مصراتة — استشارة استثمارية",
+  },
+];
+
+/* ============================================================
+   SHARED UI
+   ============================================================ */
+function Eyebrow({ children, tone = "dark", className = "" }) {
+  const color = tone === "light" ? "text-bronze-soft" : "text-bronze";
+  return (
+    <div className={"flex items-center gap-3 " + className}>
+      <span className={"h-px w-8 " + (tone === "light" ? "bg-bronze-soft/70" : "bg-bronze/60")} />
+      <span className={"text-[12px] font-medium " + color}>{children}</span>
+    </div>
+  );
+}
+
+function PrimaryButton({ children, href = "#", icon, className = "", onClick, type = "button", as = "a" }) {
+  const cls =
+    "group inline-flex items-center justify-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-cream " +
+    "transition-all duration-400 hover:bg-bronze active:scale-[0.985] " +
+    "shadow-[0_10px_30px_-14px_rgba(25,24,20,0.6)] hover:shadow-[0_14px_34px_-12px_rgba(160,124,74,0.6)] " +
+    className;
+
+  const inner = (
+    <>
+      <span>{children}</span>
+      {icon && (
+        <Icon
+          name={icon}
+          size={16}
+          className="transition-transform duration-400 group-hover:-translate-x-1"
+        />
+      )}
+    </>
+  );
+
+  if (as === "button") {
+    return <button type={type} onClick={onClick} className={cls}>{inner}</button>;
+  }
+  return <a href={href} onClick={onClick} className={cls}>{inner}</a>;
+}
+
+function GhostButton({ children, href = "#", icon, tone = "dark", className = "", onClick }) {
+  const base =
+    "group inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-[14px] font-medium " +
+    "transition-all duration-400 active:scale-[0.985] ";
+
+  const tones = {
+    dark: "border border-ink/20 text-ink hover:bg-ink hover:text-cream hover:border-ink",
+    light: "border border-white/35 text-white hover:bg-white hover:text-ink hover:border-white",
+  };
+
+  return (
+    <a href={href} onClick={onClick} className={base + tones[tone] + " " + className}>
+      <span>{children}</span>
+      {icon && <Icon name={icon} size={16} className="transition-transform duration-400 group-hover:-translate-x-1" />}
+    </a>
+  );
+}
+
+function SectionHeading({ eyebrow, title, intro, align = "start", tone = "dark", className = "" }) {
+  const isLight = tone === "light";
+  return (
+    <div className={"max-w-2xl " + (align === "center" ? "mx-auto text-center" : "") + " " + className}>
+      <Eyebrow tone={tone} className={align === "center" ? "justify-center" : ""}>{eyebrow}</Eyebrow>
+      <h2
+        className={
+          "mt-5 text-[30px] leading-[1.22] font-normal balance sm:text-[38px] lg:text-[46px] " +
+          (isLight ? "text-cream" : "text-ink")
+        }
+      >
+        {title}
+      </h2>
+      {intro && (
+        <p className={"mt-5 text-[15px] leading-[1.9] pretty " + (isLight ? "text-cream/65" : "text-muted")}>
+          {intro}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 28);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const links = [
+    { label: "الرئيسية", href: "#home" },
+    { label: "العقارات", href: "#properties" },
+    { label: "خدماتنا", href: "#services" },
+    { label: "من نحن", href: "#about" },
+    { label: "تواصل معنا", href: "#contact" },
+  ];
+
+  const solid = scrolled || open;
+
+  return (
+    <>
+      <header
+        className={
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500 " +
+          (solid
+            ? "border-b border-line bg-cream/88 backdrop-blur-xl supports-[backdrop-filter]:bg-cream/72"
+            : "border-b border-transparent bg-transparent")
+        }
+      >
+        <nav
+          aria-label="التنقل الرئيسي"
+          className="mx-auto flex max-w-shell items-center justify-between px-6 md:px-10"
+        >
+          {/* Logo */}
+          <a
+            href="#home"
+            className="flex items-baseline gap-2.5"
+            aria-label="NOVA Properties — الصفحة الرئيسية"
+          >
+            <span
+              className={
+                "font-display text-[24px] leading-none tracking-[0.24em] transition-colors duration-500 sm:text-[26px] " +
+                (solid ? "text-ink" : "text-white")
+              }
+              style={{ paddingInlineEnd: "0.06em" }}
+            >
+              NOVA
+            </span>
+            <span
+              className={
+                "hidden text-[11px] font-light transition-colors duration-500 sm:block " +
+                (solid ? "text-muted" : "text-white/60")
+              }
+            >
+              نوفا للعقارات
+            </span>
+          </a>
+
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-9 lg:flex">
+            {links.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className={
+                    "group relative inline-block py-1 text-[14px] font-medium transition-colors duration-300 " +
+                    (solid ? "text-ink/80 hover:text-ink" : "text-white/80 hover:text-white")
+                  }
+                >
+                  {l.label}
+                  <span
+                    className={
+                      "absolute bottom-0 right-0 h-px w-0 transition-all duration-400 group-hover:w-full " +
+                      (solid ? "bg-bronze" : "bg-white")
+                    }
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <a
+              href="#properties"
+              className={
+                "hidden rounded-full px-6 py-2.5 text-[13.5px] font-medium transition-all duration-400 md:inline-flex " +
+                (solid
+                  ? "bg-ink text-cream hover:bg-bronze"
+                  : "border border-white/35 text-white hover:bg-white hover:text-ink hover:border-white")
+              }
+            >
+              استكشف العقارات
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
+              className={
+                "inline-flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 lg:hidden " +
+                (solid
+                  ? "border-line text-ink hover:bg-ink hover:text-cream hover:border-ink"
+                  : "border-white/35 text-white hover:bg-white hover:text-ink")
+              }
+            >
+              <Icon name={open ? "X" : "Menu"} size={19} />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile menu */}
+      <div
+        id="mobile-menu"
+        className={
+          "fixed inset-0 z-40 bg-cream transition-all duration-500 lg:hidden " +
+          (open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0")
+        }
+        aria-hidden={!open}
+      >
+        <div className="flex h-full flex-col px-6 pb-10 pt-28">
+          <ul className="flex flex-col">
+            {links.map((l, i) => (
+              <li key={l.href} className="border-b border-line">
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-5 text-[22px] font-normal text-ink transition-colors hover:text-bronze"
+                  style={{
+                    transitionDelay: open ? `${i * 45 + 80}ms` : "0ms",
+                    opacity: open ? 1 : 0,
+                    transform: open ? "none" : "translateY(12px)",
+                    transitionProperty: "opacity, transform, color",
+                    transitionDuration: "600ms",
+                    transitionTimingFunction: "cubic-bezier(.16,1,.3,1)",
+                  }}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-auto pt-10">
+            <PrimaryButton href="#properties" onClick={() => setOpen(false)} icon="ArrowLeft" className="w-full">
+              استكشف العقارات
+            </PrimaryButton>
+
+            <div className="mt-7 flex flex-col gap-2 text-[13px] text-muted">
+              <a href="tel:+218911234567" className="inline-flex items-center gap-2.5 transition-colors hover:text-ink">
+                <Icon name="Phone" size={15} />
+                <span dir="ltr">+218 91 123 4567</span>
+              </a>
+              <a href="mailto:hello@novaproperties.ly" className="inline-flex items-center gap-2.5 transition-colors hover:text-ink">
+                <Icon name="Mail" size={15} />
+                <span dir="ltr">hello@novaproperties.ly</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+function Hero() {
+  return (
+    <section id="home" className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink">
+      {/* Media */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=80"
+          alt="فيلا متوسطية حديثة مع مسبح في ضوء الغروب"
+          className="hero-media h-full w-full object-cover object-center"
+          fetchpriority="high"
+          decoding="async"
+        />
+        {/* Legibility scrims — kept minimal */}
+        <div className="absolute inset-0 bg-ink/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-ink/55" />
+        <div className="absolute inset-0 bg-gradient-to-l from-ink/70 via-transparent to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto w-full max-w-shell px-6 pb-44 pt-36 md:px-10 md:pb-52 md:pt-44">
+        <div className="max-w-[46rem]">
+          <div className="line-grow mb-8 flex items-center gap-3">
+            <span className="h-px w-12 bg-bronze-soft" />
+            <span className="text-[12px] font-medium text-bronze-soft">
+              عقارات مختارة بعناية · ليبيا
+            </span>
+          </div>
+
+          <h1 className="text-[38px] font-light leading-[1.16] text-white balance sm:text-[52px] md:text-[66px] lg:text-[78px]">
+            نجد لك المكان
+            <br />
+            الذي يشبهك.
+          </h1>
+
+          <p className="mt-7 font-display text-[17px] italic tracking-wide text-white/60 sm:text-[19px]" dir="ltr">
+            Exceptional properties. Thoughtfully selected.
+          </p>
+
+          <p className="mt-6 max-w-lg text-[15px] leading-[1.9] text-white/70 pretty">
+            نوفا للعقارات — مجموعة محدودة من المساكن والمساحات التجارية في أفضل أحياء
+            طرابلس، مصراتة، وبنغازي.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-3.5">
+            <PrimaryButton href="#properties" icon="ArrowLeft" className="!bg-cream !text-ink hover:!bg-bronze hover:!text-cream">
+              استكشف العقارات
+            </PrimaryButton>
+            <GhostButton href="#contact" tone="light" icon="ArrowLeft">
+              تواصل معنا
+            </GhostButton>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom fade into next section */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-cream to-transparent" />
+    </section>
+  );
+}
+
+/* ============================================================
+   SEARCH PANEL
+   ============================================================ */
+function FieldSelect({ id, label, value, onChange, options, placeholder }) {
+  return (
+    <div className="flex flex-col">
+      <label htmlFor={id} className="mb-2 text-[11.5px] font-medium text-muted">
+        {label}
+      </label>
+      <div className="relative">
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="field-select w-full cursor-pointer rounded-xl border border-line bg-cream/50 py-3.5 pr-4 pl-10 text-[14px] text-ink transition-colors duration-300 hover:border-ink/25"
+        >
+          <option value="">{placeholder}</option>
+          {options.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+        <Icon
+          name="ChevronDown"
+          size={16}
+          className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted"
+        />
+      </div>
+    </div>
+  );
+}
+
+function SearchPanel({ filters, setFilters, onSearch, resultCount, active }) {
+  const submit = (e) => {
+    e.preventDefault();
+    onSearch();
+  };
+
+  return (
+    <div className="relative z-20 mx-auto -mt-28 max-w-[1180px] px-6 md:-mt-32 md:px-10">
+      <form
+        onSubmit={submit}
+        className="rounded-[24px] border border-line bg-white/92 p-5 shadow-soft backdrop-blur-xl md:p-7"
+        role="search"
+        aria-label="البحث عن العقارات"
+      >
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end lg:gap-5">
+          <FieldSelect
+            id="search-city"
+            label="الموقع"
+            placeholder="كل المدن"
+            value={filters.city}
+            onChange={(v) => setFilters((f) => ({ ...f, city: v }))}
+            options={CITIES.map((c) => ({ value: c, label: c }))}
+          />
+
+          <FieldSelect
+            id="search-type"
+            label="نوع العقار"
+            placeholder="كل الأنواع"
+            value={filters.type}
+            onChange={(v) => setFilters((f) => ({ ...f, type: v }))}
+            options={TYPES.map((t) => ({ value: t, label: t }))}
+          />
+
+          <FieldSelect
+            id="search-price"
+            label="السعر"
+            placeholder="كل الأسعار"
+            value={filters.price}
+            onChange={(v) => setFilters((f) => ({ ...f, price: v }))}
+            options={PRICE_BANDS}
+          />
+
+          <div className="flex flex-col">
+            <span className="mb-2 hidden text-[11.5px] font-medium text-transparent lg:block" aria-hidden="true">
+              بحث
+            </span>
+            <button
+              type="submit"
+              className="group inline-flex h-[50px] items-center justify-center gap-2.5 rounded-xl bg-ink px-8 text-[14px] font-medium text-cream transition-all duration-400 hover:bg-bronze active:scale-[0.985] sm:col-span-2 lg:col-span-1"
+            >
+              <Icon name="Search" size={16} className="transition-transform duration-400 group-hover:scale-110" />
+              بحث
+            </button>
+          </div>
+        </div>
+
+        {/* Result feedback */}
+        <div
+          className={
+            "grid transition-all duration-500 " +
+            (active ? "mt-5 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0")
+          }
+          aria-live="polite"
+        >
+          <div className="overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+              <p className="text-[13px] text-muted">
+                {resultCount > 0 ? (
+                  <>تم العثور على <span className="font-medium text-ink">{resultCount}</span> عقار مطابق</>
+                ) : (
+                  <>لا توجد نتائج مطابقة — جرّب توسيع نطاق البحث</>
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={() => setFilters({ city: "", type: "", price: "" })}
+                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-bronze transition-colors hover:text-ink"
+              >
+                <Icon name="RotateCcw" size={13} />
+                إعادة التعيين
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+/* ============================================================
+   PROPERTY CARD
+   ============================================================ */
+function PropertyCard({ property, index }) {
+  const [saved, setSaved] = useState(false);
+
+  return (
+    <Reveal delay={(index % 3) * 90} as="article" className="group">
+      {/* Image */}
+      <div className="relative overflow-hidden rounded-[20px] bg-sand">
+        <div className="aspect-[4/3] w-full overflow-hidden">
+          <img
+            src={property.image}
+            alt={property.name + " — " + property.location}
+            loading="lazy"
+            decoding="async"
+            className="card-img h-full w-full object-cover"
+          />
+        </div>
+
+        {/* Tag */}
+        {property.tag && (
+          <span className="absolute right-4 top-4 rounded-full bg-cream/95 px-3.5 py-1.5 text-[11px] font-medium text-ink shadow-[0_4px_14px_-6px_rgba(25,24,20,0.4)] backdrop-blur">
+            {property.tag}
+          </span>
+        )}
+
+        {/* Save */}
+        <button
+          type="button"
+          onClick={() => setSaved((s) => !s)}
+          aria-pressed={saved}
+          aria-label={saved ? `إزالة ${property.name} من المحفوظات` : `حفظ ${property.name}`}
+          className={
+            "absolute left-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full backdrop-blur transition-all duration-300 " +
+            (saved
+              ? "bg-bronze text-cream"
+              : "bg-cream/85 text-ink opacity-0 hover:bg-cream group-hover:opacity-100 focus-visible:opacity-100")
+          }
+        >
+          <Icon name="Bookmark" size={15} strokeWidth={1.8} />
+        </button>
+
+        <div className="pointer-events-none absolute inset-0 rounded-[20px] ring-1 ring-inset ring-ink/6" />
+      </div>
+
+      {/* Body */}
+      <div className="pt-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h3 className="truncate text-[17.5px] font-medium leading-snug text-ink">
+              {property.name}
+            </h3>
+            <p className="mt-1.5 flex items-center gap-1.5 text-[13px] text-muted">
+              <Icon name="MapPin" size={13.5} />
+              {property.location}
+            </p>
+          </div>
+
+          <div className="shrink-0 text-left">
+            <p className="text-[16px] font-medium leading-tight text-bronze">
+              {property.price.toLocaleString("en-US")}
+            </p>
+            <p className="mt-0.5 text-[11px] text-muted">د.ل</p>
+          </div>
+        </div>
+
+        {/* Specs */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-4 text-[12.5px] text-muted">
+          <span className="inline-flex items-center gap-2">
+            <Icon name="BedDouble" size={14.5} />
+            {property.beds} غرف
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Icon name="Bath" size={14.5} />
+            {property.baths} حمامات
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Icon name="Maximize" size={14.5} />
+            <span dir="ltr">{property.area} م²</span>
+          </span>
+        </div>
+
+        {/* CTA */}
+        <a
+          href="#contact"
+          className="group/btn mt-5 inline-flex w-full items-center justify-between rounded-xl border border-line px-5 py-3 text-[13.5px] font-medium text-ink transition-all duration-400 hover:border-ink hover:bg-ink hover:text-cream"
+        >
+          <span>عرض العقار</span>
+          <Icon
+            name="ArrowLeft"
+            size={15}
+            className="transition-transform duration-400 group-hover/btn:-translate-x-1"
+          />
+        </a>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ============================================================
+   FEATURED PROPERTIES
+   ============================================================ */
+function FeaturedProperties({ properties, filtered, onReset }) {
+  return (
+    <section id="properties" className="scroll-mt-24 bg-cream pb-24 pt-24 md:pb-32 md:pt-32 lg:pb-40 lg:pt-36">
+      <div className="mx-auto max-w-shell px-6 md:px-10">
+        {/* Heading */}
+        <div className="flex flex-col gap-8 border-b border-line pb-10 md:flex-row md:items-end md:justify-between md:pb-12">
+          <Reveal>
+            <SectionHeading
+              eyebrow="عقارات مختارة"
+              title="مجموعة محدودة، مختارة بعناية."
+              intro="كل عقار في هذه القائمة خضع لتقييم الموقع والجودة والقيمة. لا شيء هنا بالصدفة."
+            />
+          </Reveal>
+
+          <Reveal delay={120} className="shrink-0">
+            <div className="flex items-center gap-4">
+              <span className="text-[13px] text-muted">
+                <span className="font-medium text-ink">{properties.length}</span> عقار
+              </span>
+              {filtered && (
+                <button
+                  type="button"
+                  onClick={onReset}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-line px-4 py-2 text-[12.5px] font-medium text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream"
+                >
+                  <Icon name="X" size={13} />
+                  مسح الفلاتر
+                </button>
+              )}
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Grid */}
+        {properties.length > 0 ? (
+          <div className="mt-12 grid gap-x-7 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
+            {properties.map((p, i) => (
+              <PropertyCard key={p.id} property={p} index={i} />
+            ))}
+          </div>
+        ) : (
+          <Reveal className="mt-16 flex flex-col items-center justify-center rounded-[22px] border border-dashed border-line py-20 text-center">
+            <Icon name="SearchX" size={28} className="text-bronze" />
+            <p className="mt-5 text-[17px] font-medium text-ink">لا توجد نتائج مطابقة</p>
+            <p className="mt-2 max-w-sm text-[14px] leading-relaxed text-muted">
+              جرّب تغيير المدينة أو نوع العقار، أو تواصل معنا مباشرة وسنساعدك في البحث.
+            </p>
+            <button
+              type="button"
+              onClick={onReset}
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/20 px-6 py-3 text-[13.5px] font-medium text-ink transition-colors hover:bg-ink hover:text-cream hover:border-ink"
+            >
+              إعادة تعيين البحث
+            </button>
+          </Reveal>
+        )}
+
+        {/* View all */}
+        {properties.length > 0 && (
+          <Reveal delay={80} className="mt-16 flex justify-center">
+            <GhostButton href="#contact" icon="ArrowLeft">
+              عرض جميع العقارات
+            </GhostButton>
+          </Reveal>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   WHY NOVA
+   ============================================================ */
+function WhyNova() {
+  return (
+    <section className="bg-sand/60 py-24 md:py-32 lg:py-40">
+      <div className="mx-auto max-w-shell px-6 md:px-10">
+        <Reveal>
+          <SectionHeading
+            eyebrow="لماذا نوفا"
+            title="طريقة مختلفة في التعامل مع العقار."
+            intro="لا نتعامل مع العقارات كأرقام. نتعامل معها كقرارات حياة — ولهذا نعمل ببطء أكبر، ودقة أعلى."
+            align="center"
+          />
+        </Reveal>
+
+        <Reveal delay={140} className="mt-16 md:mt-20">
+          <div className="grid overflow-hidden rounded-[22px] border border-line bg-line md:grid-cols-3">
+            {WHY.map((item, i) => (
+              <div
+                key={item.title}
+                className="group relative bg-cream p-8 transition-colors duration-500 hover:bg-white md:p-10 lg:p-12"
+              >
+                {/* index */}
+                <div className="flex items-start justify-between">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-line text-bronze transition-all duration-500 group-hover:border-bronze group-hover:bg-bronze group-hover:text-cream">
+                    <Icon name={item.icon} size={20} strokeWidth={1.4} />
+                  </span>
+                  <span className="font-display text-[15px] tracking-[0.2em] text-muted/50" dir="ltr">
+                    0{i + 1}
+                  </span>
+                </div>
+
+                <h3 className="mt-8 text-[21px] font-medium text-ink md:text-[23px]">{item.title}</h3>
+                <p className="mt-1 font-display text-[14px] italic tracking-wide text-bronze/80" dir="ltr">
+                  {item.en}
+                </p>
+                <p className="mt-4 text-[14.5px] leading-[1.9] text-muted pretty">{item.desc}</p>
+
+                <span className="absolute inset-x-8 bottom-0 h-px origin-right scale-x-0 bg-bronze transition-transform duration-700 group-hover:scale-x-100 md:inset-x-10" />
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+function About() {
+  const stats = [
+    { value: "12+", label: "سنة في السوق الليبي" },
+    { value: "480+", label: "عقار تمت إدارته" },
+    { value: "3", label: "مدن رئيسية" },
+  ];
+
+  return (
+    <section id="about" className="scroll-mt-24 bg-cream py-24 md:py-32 lg:py-40">
+      <div className="mx-auto max-w-shell px-6 md:px-10">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+          {/* Image */}
+          <Reveal className="lg:col-span-6">
+            <div className="relative">
+              <div className="overflow-hidden rounded-[22px] bg-sand">
+                <div className="aspect-[4/5] w-full overflow-hidden sm:aspect-[5/5]">
+                  <img
+                    src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80"
+                    alt="مساحة داخلية هادئة في أحد عقارات نوفا"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(.16,1,.3,1)] hover:scale-[1.04]"
+                  />
+                </div>
+              </div>
+
+              {/* Floating detail card */}
+              <div className="absolute -bottom-6 right-6 hidden rounded-2xl border border-line bg-cream/95 px-6 py-5 shadow-card backdrop-blur sm:block">
+                <p className="font-display text-[30px] leading-none text-ink">2013</p>
+                <p className="mt-2 text-[12px] text-muted">بدأنا من طرابلس</p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Text */}
+          <Reveal delay={120} className="lg:col-span-5 lg:col-start-8">
+            <Eyebrow>من نحن</Eyebrow>
+
+            <h2 className="mt-5 text-[28px] font-normal leading-[1.3] text-ink balance sm:text-[36px] lg:text-[42px]">
+              العقار ليس مجرد مساحة،
+              <br className="hidden sm:block" />
+              بل بداية لمرحلة جديدة.
+            </h2>
+
+            <div className="mt-7 space-y-5 text-[15px] leading-[1.95] text-muted pretty">
+              <p>
+                نوفا للعقارات شركة ليبية متخصصة في العقارات السكنية والتجارية. نعمل مع
+                مجموعة محدودة من العملاء في كل مرة — لأن الجودة لا تتوافق مع الأعداد الكبيرة.
+              </p>
+              <p>
+                نساعد عملاءنا على اكتشاف عقارات مختارة بعناية في طرابلس، مصراتة، وبنغازي؛
+                من الشقق العائلية الهادئة إلى الفيلات والمساحات التجارية ذات العائد
+                الاستثماري الواضح.
+              </p>
+              <p className="text-ink/80">
+                ما يميزنا ليس قائمة العقارات، بل الطريقة التي نصل بها إليها.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="mt-10 grid grid-cols-3 gap-6 border-t border-line pt-8">
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <p className="font-display text-[26px] leading-none text-bronze sm:text-[32px]" dir="ltr">
+                    {s.value}
+                  </p>
+                  <p className="mt-2.5 text-[12px] leading-snug text-muted">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+function Services() {
+  return (
+    <section id="services" className="scroll-mt-24 bg-sand/60 py-24 md:py-32 lg:py-40">
+      <div className="mx-auto max-w-shell px-6 md:px-10">
+        <Reveal>
+          <SectionHeading
+            eyebrow="خدماتنا"
+            title="كل ما تحتاجه، تحت سقف واحد."
+            intro="أربع خدمات أساسية تغطي رحلة العقار كاملة — من البحث الأول حتى الإدارة طويلة الأمد."
+          />
+        </Reveal>
+
+        <div className="mt-14 border-y border-line md:mt-20">
+          {SERVICES.map((s, i) => (
+            <Reveal key={s.title} delay={i * 70}>
+              <div
+                className={
+                  "group grid grid-cols-1 items-start gap-4 px-1 py-8 transition-colors duration-500 md:grid-cols-12 md:items-center md:gap-8 md:px-4 md:py-10 " +
+                  (i !== SERVICES.length - 1 ? "border-b border-line" : "") +
+                  " hover:bg-cream/70 rounded-xl"
+                }
+              >
+                <span className="font-display text-[15px] tracking-[0.2em] text-bronze md:col-span-1" dir="ltr">
+                  {s.n}
+                </span>
+
+                <div className="flex items-center gap-3 md:col-span-4">
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-bronze transition-all duration-500 group-hover:border-bronze group-hover:bg-bronze group-hover:text-cream">
+                    <Icon name={s.icon} size={17} strokeWidth={1.4} />
+                  </span>
+                  <h3 className="text-[20px] font-medium text-ink md:text-[24px]">{s.title}</h3>
+                </div>
+
+                <p className="text-[14.5px] leading-[1.9] text-muted pretty md:col-span-6">
+                  {s.desc}
+                </p>
+
+                <div className="hidden md:col-span-1 md:flex md:justify-end">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted transition-all duration-500 group-hover:bg-ink group-hover:text-cream">
+                    <Icon name="ArrowLeft" size={16} />
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+function Testimonials() {
+  return (
+    <section className="bg-cream py-24 md:py-32 lg:py-40">
+      <div className="mx-auto max-w-shell px-6 md:px-10">
+        <Reveal>
+          <SectionHeading
+            eyebrow="آراء العملاء"
+            title="ما يقوله من عملنا معهم."
+            align="center"
+          />
+        </Reveal>
+
+        <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-3 md:gap-7">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 110}>
+              <figure className="flex h-full flex-col rounded-[22px] border border-line bg-white/70 p-8 transition-all duration-500 hover:-translate-y-1 hover:border-ink/15 hover:bg-white hover:shadow-card md:p-9">
+                <Icon name="Quote" size={22} className="text-bronze/70" />
+
+                <blockquote className="mt-6 flex-1 text-[15px] leading-[1.95] text-ink/85 pretty">
+                  {t.quote}
+                </blockquote>
+
+                <figcaption className="mt-8 border-t border-line pt-6">
+                  <p className="text-[14.5px] font-medium text-ink">{t.name}</p>
+                  <p className="mt-1 text-[12.5px] text-muted">{t.role}</p>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+function FinalCTA() {
+  return (
+    <section id="contact" className="relative isolate scroll-mt-24 overflow-hidden bg-ink">
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=2200&q=80"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover opacity-35"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/85 to-ink/70" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-shell px-6 py-28 md:px-10 md:py-36 lg:py-44">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <Eyebrow tone="light" className="justify-center">ابدأ اليوم</Eyebrow>
+          </Reveal>
+
+          <Reveal delay={90}>
+            <h2 className="mt-6 text-[32px] font-light leading-[1.24] text-cream balance sm:text-[44px] lg:text-[56px]">
+              مستعد للعثور على
+              <br className="hidden sm:block" />
+              عقارك القادم؟
+            </h2>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <p className="mx-auto mt-6 max-w-xl text-[15px] leading-[1.95] text-cream/60 pretty">
+              أخبرنا بما تبحث عنه، وسيتواصل معك أحد مستشارينا خلال 24 ساعة بقائمة
+              مختارة تناسب احتياجك وميزانيتك.
+            </p>
+          </Reveal>
+
+          <Reveal delay={230}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
+              <PrimaryButton
+                href="#properties"
+                icon="ArrowLeft"
+                className="!bg-cream !text-ink hover:!bg-bronze hover:!text-cream"
+              >
+                ابدأ البحث
+              </PrimaryButton>
+
+              <GhostButton href="tel:+218911234567" tone="light" icon="Phone">
+                اتصل بنا
+              </GhostButton>
+            </div>
+          </Reveal>
+
+          <Reveal delay={300}>
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 border-t border-white/10 pt-10 text-[13px] text-cream/50">
+              <span className="inline-flex items-center gap-2.5">
+                <Icon name="MapPin" size={15} />
+                طرابلس · مصراتة · بنغازي
+              </span>
+              <a href="tel:+218911234567" className="inline-flex items-center gap-2.5 transition-colors hover:text-cream">
+                <Icon name="Phone" size={15} />
+                <span dir="ltr">+218 91 123 4567</span>
+              </a>
+              <a href="mailto:hello@novaproperties.ly" className="inline-flex items-center gap-2.5 transition-colors hover:text-cream">
+                <Icon name="Mail" size={15} />
+                <span dir="ltr">hello@novaproperties.ly</span>
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+function Footer() {
+  const year = new Date().getFullYear();
+
+  const navLinks = [
+    { label: "العقارات", href: "#properties" },
+    { label: "خدماتنا", href: "#services" },
+    { label: "من نحن", href: "#about" },
+    { label: "تواصل معنا", href: "#contact" },
+  ];
+
+  const socials = [
+    { name: "Instagram", href: "#", label: "إنستغرام" },
+    { name: "Facebook", href: "#", label: "فيسبوك" },
+    { name: "Linkedin", href: "#", label: "لينكدإن" },
+    { name: "Twitter", href: "#", label: "إكس" },
+  ];
+
+  return (
+    <footer className="border-t border-white/8 bg-ink text-cream">
+      <div className="mx-auto max-w-shell px-6 py-16 md:px-10 md:py-20">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Brand */}
+          <div className="lg:col-span-5">
+            <div className="flex items-baseline gap-3">
+              <span
+                className="font-display text-[30px] leading-none tracking-[0.24em] text-cream"
+                style={{ paddingInlineEnd: "0.06em" }}
+              >
+                NOVA
+              </span>
+              <span className="text-[12px] font-light text-cream/45">نوفا للعقارات</span>
+            </div>
+
+            <p className="mt-6 max-w-sm text-[14px] leading-[1.95] text-cream/50 pretty">
+              عقارات استثنائية، مختارة بعناية. نعمل في طرابلس، مصراتة، وبنغازي — ونساعد
+              عملاءنا على اتخاذ قرارات عقارية واثقة.
+            </p>
+
+            <div className="mt-8 flex items-center gap-3">
+              {socials.map((s) => (
+                <a
+                  key={s.name}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-cream/60 transition-all duration-400 hover:border-bronze hover:bg-bronze hover:text-cream"
+                >
+                  <Icon name={s.name} size={16} strokeWidth={1.5} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Nav */}
+          <nav className="lg:col-span-3" aria-label="روابط الفوتر">
+            <h3 className="text-[12px] font-medium text-cream/40">التنقل</h3>
+            <ul className="mt-6 space-y-3.5">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="group inline-flex items-center gap-2 text-[14.5px] text-cream/75 transition-colors duration-300 hover:text-cream"
+                  >
+                    <span className="h-px w-0 bg-bronze transition-all duration-400 group-hover:w-4" />
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Contact */}
+          <div className="lg:col-span-4">
+            <h3 className="text-[12px] font-medium text-cream/40">تواصل</h3>
+            <ul className="mt-6 space-y-4 text-[14.5px] text-cream/75">
+              <li className="flex items-start gap-3">
+                <Icon name="MapPin" size={16} className="mt-0.5 text-bronze" />
+                <span>ليبيا — طرابلس، شارع النصر، برج نوفا</span>
+              </li>
+              <li>
+                <a
+                  href="tel:+218911234567"
+                  className="flex items-start gap-3 transition-colors hover:text-cream"
+                >
+                  <Icon name="Phone" size={16} className="mt-0.5 text-bronze" />
+                  <span dir="ltr">+218 91 123 4567</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:hello@novaproperties.ly"
+                  className="flex items-start gap-3 transition-colors hover:text-cream"
+                >
+                  <Icon name="Mail" size={16} className="mt-0.5 text-bronze" />
+                  <span dir="ltr">hello@novaproperties.ly</span>
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Icon name="Clock" size={16} className="mt-0.5 text-bronze" />
+                <span>الأحد – الخميس · 9:00 – 18:00</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-8 text-[12.5px] text-cream/40 md:flex-row">
+          <p>© {year} NOVA Properties — نوفا للعقارات. جميع الحقوق محفوظة.</p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="transition-colors hover:text-cream/70">سياسة الخصوصية</a>
+            <a href="#" className="transition-colors hover:text-cream/70">الشروط والأحكام</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ============================================================
+   APP
+   ============================================================ */
+function App() {
+  const [filters, setFilters] = useState({ city: "", type: "", price: "" });
+  const [applied, setApplied] = useState({ city: "", type: "", price: "" });
+
+  const filtered = useMemo(() => {
+    return PROPERTIES.filter((p) => {
+      if (applied.city && p.city !== applied.city) return false;
+      if (applied.type && p.type !== applied.type) return false;
+      if (applied.price === "low" && p.price >= 1000000) return false;
+      if (applied.price === "mid" && (p.price < 1000000 || p.price > 2000000)) return false;
+      if (applied.price === "high" && p.price <= 2000000) return false;
+      return true;
+    });
+  }, [applied]);
+
+  const isFiltered = Boolean(applied.city || applied.type || applied.price);
+
+  const handleSearch = useCallback(() => {
+    setApplied(filters);
+    const el = document.getElementById("properties");
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, [filters]);
+
+  const handleReset = useCallback(() => {
+    setFilters({ city: "", type: "", price: "" });
+    setApplied({ city: "", type: "", price: "" });
+  }, []);
+
+  return (
+    <div className="page-enter min-h-screen bg-cream font-sans antialiased">
+      <a
+        href="#properties"
+        className="sr-only focus:not-sr-only focus:fixed focus:right-6 focus:top-6 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-[13px] focus:text-cream"
+      >
+        تخطَّ إلى المحتوى الرئيسي
+      </a>
+
+      <Nav />
+
+      <main>
+        <Hero />
+
+        <SearchPanel
+          filters={filters}
+          setFilters={setFilters}
+          onSearch={handleSearch}
+          resultCount={filtered.length}
+          active={isFiltered}
+        />
+
+        <FeaturedProperties
+          properties={filtered}
+          filtered={isFiltered}
+          onReset={handleReset}
+        />
+
+        <WhyNova />
+        <About />
+        <Services />
+        <Testimonials />
+        <FinalCTA />
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
